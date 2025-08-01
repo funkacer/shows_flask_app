@@ -29,16 +29,15 @@ def search():
     #if request.form.get("q"):
         #query = request.form.get("q") # pro POST
         query = request.args.get("q")
-        #if not query:
-        #query = ' '
-        con = sqlite3.connect(DB)
-        #con.row_factory = sqlite3.Row
-        con.row_factory = dict_factory
-        cur = con.execute(f"SELECT * from shows where title LIKE '%{query}%'")
-        shows = cur.fetchall()
-        con.close
-        print(query)
-    #else:
-        #shows = []
+        if query:
+            con = sqlite3.connect(DB)
+            #con.row_factory = sqlite3.Row
+            con.row_factory = dict_factory
+            cur = con.execute(f"SELECT * from shows where title LIKE '%{query}%'")
+            shows = cur.fetchall()
+            con.close
+        #print(query)
+        else:
+            shows = [{'title':'tady bude vysledek'}]
         #return render_template("search.html", shows=shows)
         return jsonify(shows)
