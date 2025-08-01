@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1>Shows</h1>
+
+<input autocomplete="off" autofocus placeholder="Query" type="search">
+
+<!-- <form action="/search" method="get">
+    <input autocomplete="off" autofocus name="q" placeholder="Query" type="search">
+    <button type="submit">Search</button>
+</form> -->
+
+<ul></ul>
+
+<div></div>
+
+<script>
+    let input = document.querySelector('input');
+    input.addEventListener('input', async function () {
+        let response = await fetch('/search?q=' + input.value);
+        // let shows = await response.text();
+        let shows = await response.json();
+        let html = '';
+        for(let show of shows){
+            html += '<li>' + show.title + '</li>'
+        }
+        // document.querySelector('div').innerHTML = shows;
+        document.querySelector('ul').innerHTML = html;
+    });
+
+
+
+
+    let ul = document.querySelector('ul');
+    ul.innerHTML = '<li>Tady bude vysledek</li>'
+
+
+</script>
+
+{% endblock %}

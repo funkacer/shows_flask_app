@@ -1,0 +1,11 @@
+import sqlite3
+con = sqlite3.connect("shows.db")
+con.execute("DROP TABLE IF EXISTS shows;")
+con.execute("CREATE TABLE shows (id INTEGER, title TEXT NOT NULL, PRIMARY KEY (id));")
+con.execute("insert into shows (title) values ('Stopařův průvodce po galaxii')")
+con.execute("insert into shows (title) values ('Den trifidů')")
+con.execute("insert into shows (title) values ('Mayday')")
+con.execute("insert into shows (title) values ('Jak věci fungují')")
+con.execute("insert into shows (title) values ('Kocour Mikeš')")
+con.commit()
+con.close()
